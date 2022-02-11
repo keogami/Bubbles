@@ -5,10 +5,10 @@ const $ = document
 const canvas = $.querySelector("canvas#bubbles")
 
 canvas.width = innerWidth
-canvas.heght = innerHeight
+canvas.height = innerHeight
 
 new Bubbles(canvas)
   .color("black")
   .size(4)
-  .velocity(2)
+  .velocity(.125)
   .run()
