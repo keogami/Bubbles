@@ -47,9 +47,9 @@ class Bubbles {
     return displacement
   }
 
-  update(timestamp) {
+  update(data) {
     for (let bubble of this.bubbleSet) {
-      bubble.update(timestamp, {displacement: this.getMouseDisplacement()})
+      bubble.update(data)
       if (!this._isInScreen(bubble._coord)) {
         this.bubbleSet.delete(bubble)
       }
@@ -89,8 +89,9 @@ class Bubbles {
     this.startSpawningBubbles()
     const frame = (timestamp) => {
       !this._end && requestAnimationFrame(frame)
+      const displacement = this.getMouseDisplacement()
 
-      this.update(timestamp)
+      this.update({timestamp, displacement})
       this.draw()
     }
 
