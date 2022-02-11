@@ -19,6 +19,7 @@ class Bubbles {
 
     this._spawnBubbleTimeout = null
     this._isInScreen = isInRect(0, 0, this.canvas.width, this.canvas.height)
+    this._end = true
   }
 
   color(c) {
@@ -64,10 +65,15 @@ class Bubbles {
     }).bind(this), 1000)
   }
 
+  end() {
+    this._end = true
+  }
+
   run() {
+    this._end = false
     this.startSpawningBubbles()
     const frame = (timestamp) => {
-      requestAnimationFrame(frame)
+      !this._end && requestAnimationFrame(frame)
 
       this.update(timestamp)
       this.draw()
