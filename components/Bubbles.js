@@ -7,6 +7,8 @@ const isInRect = (x, y, width, height) => (
   isInBound(isInRange(x, x + width), isInRange(y, y + height))
 )
 
+const randInRange = (min, max) => Math.floor(Math.random() * (max - min)) + min
+
 class Bubbles {
   constructor(canvas, {color="black", size=3, velocity=2} = {}) {
     this.canvas = canvas
@@ -53,11 +55,18 @@ class Bubbles {
     }
   }
 
+  genRandomCoord() {
+    return {
+      x: randInRange(10, this.canvas.width - 10),
+      y: this.canvas.height,
+    }
+  }
+
   startSpawningBubbles() {
     this._spawnBubbleTimeout = setTimeout((function spawnBubble() {
       this.bubbleSet.add(new Bubble({
         color: this._color,
-        coord: {x: this.canvas.width/2, y: this.canvas.height/2},
+        coord: this.genRandomCoord(),
         velocity: this._velocity,
         size: this._size
       }))
