@@ -8,35 +8,19 @@ const isInRect = (x, y, width, height) => (
 )
 
 const randInRange = (min, max) => Math.floor(Math.random() * (max - min)) + min
+const randInArray = (arr) => arr[randInRange(0, arr.length)]
 
 class Bubbles {
-  constructor(canvas, {color="black", size=3, velocity=2} = {}) {
+  constructor(canvas, variants = []) {
     this.canvas = canvas
     this.ctx = canvas.getContext("2d")
     this.bubbleSet = new Set()
 
-    this._color = color
-    this._size = size
-    this._velocity = velocity
+    this._variants = variants
 
     this._spawnBubbleTimeout = null
     this._isInScreen = isInRect(0, 0, this.canvas.width, this.canvas.height)
     this._end = true
-  }
-
-  color(c) {
-    this._color = c
-    return this
-  }
-
-  size(s) {
-    this._size = s
-    return this
-  }
-
-  velocity(v) {
-    this._velocity = v
-    return this
   }
 
   update(timestamp) {
@@ -65,10 +49,8 @@ class Bubbles {
   startSpawningBubbles() {
     this._spawnBubbleTimeout = setTimeout((function spawnBubble() {
       this.bubbleSet.add(new Bubble({
-        color: this._color,
+        ...randInArray(this._variants),
         coord: this.genRandomCoord(),
-        velocity: this._velocity,
-        size: this._size
       }))
       this._spawnBubbleTimeout = setTimeout(spawnBubble.bind(this), 3000)
     }).bind(this), 3000)
