@@ -70,8 +70,8 @@ class Bubbles {
         velocity: this._velocity,
         size: this._size
       }))
-      this._spawnBubbleTimeout = setTimeout(spawnBubble.bind(this), 1000)
-    }).bind(this), 1000)
+      this._spawnBubbleTimeout = setTimeout(spawnBubble.bind(this), 3000)
+    }).bind(this), 3000)
   }
 
   end() {

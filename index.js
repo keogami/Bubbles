@@ -10,5 +10,5 @@ canvas.height = innerHeight
 new Bubbles(canvas)
   .color("black")
   .size(4)
-  .velocity(.125)
+  .velocity(.325)
   .run()
